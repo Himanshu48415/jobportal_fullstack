@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from './ui/button'
 import { Search } from 'lucide-react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,12 +9,6 @@ const HeroSection = () => {
     const [query, setQuery] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const searchedQuery = useSelector((state) => state.job.searchedQuery);
-    useEffect(() => {
-        if (searchedQuery) {
-            dispatch(setSearchedQuery('')); // Reset the query when rendering this component
-        }
-    }, [dispatch, searchedQuery]);
 
     const searchJobHandler = () => {
         dispatch(setSearchedQuery(query));

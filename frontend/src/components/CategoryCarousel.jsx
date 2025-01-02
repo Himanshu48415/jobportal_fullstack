@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import { Button } from './ui/button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSearchedQuery } from '@/redux/jobSlice';
 
@@ -39,14 +39,6 @@ const category = [
 const CategoryCarousel = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const searchedQuery = useSelector((state) => state.job.searchedQuery);
-
-    useEffect(() => {
-        // Reset the searchedQuery when rendering the CategoryCarousel
-        if (searchedQuery) {
-            dispatch(setSearchedQuery(''));
-        }
-    }, [searchedQuery, dispatch]);
     const searchJobHandler = (query) => {
         dispatch(setSearchedQuery(query));
         navigate("/browse");
