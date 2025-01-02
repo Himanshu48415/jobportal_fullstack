@@ -25,9 +25,16 @@ const FilterCard = () => {
     const changeHandler = (value) => {
         setSelectedValue(value);
     }
-    useEffect(()=>{
+    const clearFilters = () => {
+        setSelectedValue('');
+        dispatch(setSearchedQuery(''));
+    };
+    useEffect(() => {
         dispatch(setSearchedQuery(selectedValue));
-    },[selectedValue]);
+        return () => {
+            dispatch(setSearchedQuery('')); // Reset query when unmounting
+        };
+    }, [selectedValue, dispatch]);
     return (
         <div className='w-full bg-white p-3 rounded-md'>
             <h1 className='font-bold text-lg'>Filter Jobs</h1>
@@ -52,6 +59,12 @@ const FilterCard = () => {
                     ))
                 }
             </RadioGroup>
+            <button
+                className="mt-3 bg-gray-200 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-300"
+                onClick={clearFilters}
+            >
+                Clear Filters
+            </button>
         </div>
     )
 }
