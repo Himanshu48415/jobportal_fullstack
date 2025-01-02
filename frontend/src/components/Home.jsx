@@ -5,17 +5,14 @@ import CategoryCarousel  from './CategoryCarousel'
 import LatestJobs from './LatestJobs'
 import Footer from './shared/Footer'
 import useGetAllJobs from '@/hooks/useGetAllJobs'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSearchedQuery } from '@/redux/jobSlice'
 
 const Home = () => {
   useGetAllJobs();
   const { user } = useSelector(store => store.auth);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(setSearchedQuery(''));
     if (user?.role === 'recruiter') {
       navigate("/admin/companies");
     }

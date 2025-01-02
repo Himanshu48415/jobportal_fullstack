@@ -8,13 +8,11 @@ import axios from 'axios'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import useGetCompanyById from '@/hooks/useGetCompanyById'
-import { setSingleCompany } from '@/redux/companySlice'
 
 const CompanySetup = () => {
     const params = useParams();
-    const dispatch = useDispatch();
     useGetCompanyById(params.id);
     const [input, setInput] = useState({
         name: "",
@@ -56,7 +54,6 @@ const CompanySetup = () => {
             });
             if (res.data.success) {
                 toast.success(res.data.message);
-                dispatch(setSingleCompany(res.data.updatedCompany));
                 navigate("/admin/companies");
             }
         } catch (error) {
