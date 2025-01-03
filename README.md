@@ -30,6 +30,7 @@
   - React.js
   - Redux Toolkit
   - Tailwind CSS
+  - Shadcn/ui
   - Axios
 
 - **Backend:**
