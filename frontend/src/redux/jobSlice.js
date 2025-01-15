@@ -29,7 +29,21 @@ const jobSlice = createSlice({
         },
         setSearchedQuery:(state,action) => {
             state.searchedQuery = action.payload;
-        }
+            // Reset filteredJobs when the query is cleared
+            if (!action.payload) {
+                state.filteredJobs = state.allJobs;
+            } else {
+                state.filteredJobs = state.allJobs.filter((job) =>
+                job.name.toLowerCase().includes(action.payload.toLowerCase())
+                );
+            }
+        },
+        resetFilters: (state) => {
+            // Action to reset all filters to default
+            state.filteredJobs = state.allJobs;
+            state.searchJobByText = "";
+            state.searchedQuery = "";
+        },
     }
 });
 export const {
@@ -38,6 +52,7 @@ export const {
     setAllAdminJobs,
     setSearchJobByText, 
     setAllAppliedJobs,
-    setSearchedQuery
+    setSearchedQuery,
+    resetFilters
 } = jobSlice.actions;
 export default jobSlice.reducer;
