@@ -34,7 +34,7 @@ const jobSlice = createSlice({
                 state.filteredJobs = state.allJobs;
             } else {
                 state.filteredJobs = state.allJobs.filter((job) =>
-                job.name.toLowerCase().includes(action.payload.toLowerCase())
+                job.title?.toLowerCase().includes(action.payload.toLowerCase())
                 );
             }
         },
